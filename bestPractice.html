@@ -3,10 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Best Practice</title>
+    <title>Best Coding Practices</title>
     <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
 </head>
 <body>
-    <header>Best Practice</header>
+    <header>
+        <h1>Best Coding Practices</h1>
+    </header>
+    
+    <main>
+        <p>Select the best practices your website follows:</p>
+        <ul id="practices-list">
+            <li>
+                <input type="checkbox" id="semantic-html">
+                <label for="semantic-html">Use Semantic HTML (e.g., &lt;header&gt;, &lt;main&gt;, &lt;footer&gt;)</label>
+            </li>
+            <li>
+                <input type="checkbox" id="alt-text">
+                <label for="alt-text">Use `alt` attributes for images</label>
+            </li>
+            <li>
+                <input type="checkbox" id="heading-structure">
+                <label for="heading structure">Use proper heading structure (h1-h6 hierarchy)</label>
+            </li>
+            <li>
+                <input type="checkbox" id="responsive-design">
+                <label for="responsive-design">Ensure responsive design using CSS Grid/Flexbox</label>
+            </li>
+            <li>
+                <input type="checkbox" id="separate-content">
+                <label for="separate-content">Separate content (HTML) from presentation (CSS)</label>
+            </li>
+            <li>
+                <input type="checkbox" id="inline-styling">
+                <label for="inline-styling">Avoid inline styles where possible</label>
+            </li>
+            <li>
+                <input type="checkbox" id="let-const">
+                <label for="let-const">Use let and const instead of var</label>
+            </li>
+            <li>
+                <input type="checkbox" id="readable">
+                <label for="readable">Keep JavaScript code modular and readable</label>
+            </li>
+            <li>
+                <input type="checkbox" id="event-delegation">
+                <label for="event-delegation">Use event delegation for better performance</label>
+            </li>
+            <li>
+                <input type="checkbox" id="accessible-website">
+                <label for="accessible-website">Keep your website accessible (ARIA attributes, color contrast)</label>
+            </li>
+            <li>
+                <input type="checkbox" id="Optimize-performance">
+                <label for="Optimize-performance">Optimize performance (minify CSS/JS, use lazy loading)</label>
+            </li>
+            <li>
+                <input type="checkbox" id="general">
+                <label for="general">Ensure cross-browser compatibility</label>
+            </li>
+        </ul>
+
+        <div id="summary">
+            <p><strong>Practices Met:</strong> <span id="count">0</span></p>
+            <p id="success-message"></p>
+            <div id="reward"></div>
+        </div>
+    </main>
 </body>
 </html>
