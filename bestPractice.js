@@ -21,54 +21,49 @@ document.addEventListener("DOMContentLoaded", () => {
     const countDisplay = document.getElementById("count");
     const successMessage = document.getElementById("success-message");
     const rewardContainer = document.getElementById("reward");
+    const progressBar = document.getElementById("progress-bar");
 
-    // Load Saved state data from local storage
+    if (!bestPracticeContainer || !countDisplay || !successMessage || !rewardContainer || !progressBar) {
+        console.error("Some required elements are missing.");
+        return;
+    }
+
+    // Load Saved state from local storage
     const prevState = JSON.parse(localStorage.getItem("checkedPractices")) || {};
 
-    bestPracticeList.forEach(practice => {
+    bestPracticeList.forEach(({ id, text, explanation }) => {
         const listItem = document.createElement("li");
-    
+
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
-        checkbox.id = practice.id;
-        checkbox.checked = prevState[practice.id] || false;
-    
+        checkbox.id = id;
+        checkbox.checked = prevState[id] || false;
+
         const label = document.createElement("label");
-        label.htmlFor = practice.id;
-        label.textContent = practice.text;
+        label.htmlFor = id;
+        label.textContent = text;
         label.classList.add("label");
-    
-        const explanation = document.createElement("p");
-        explanation.classList.add("explanation");
-        explanation.textContent = practice.explanation;
-    
-        listItem.appendChild(checkbox);
-        listItem.appendChild(label);
-        listItem.appendChild(explanation);
+
+        const explanationPara = document.createElement("p");
+        explanationPara.classList.add("explanation");
+        explanationPara.textContent = explanation;
+
+        listItem.append(checkbox, label, explanationPara);
         bestPracticeContainer.appendChild(listItem);
     });
-    
 
     function summaryUpdate() {
-        const checkboxes = document.querySelectorAll("#best-practice-list input");
-        let checkedCount = [...checkboxes].filter(cb => cb.checked).length;
+        const checkboxes = [...document.querySelectorAll("#best-practice-list input")];
+        const checkedCount = checkboxes.filter(cb => cb.checked).length;
         const totalPractices = checkboxes.length;
-        
+
         countDisplay.textContent = `${checkedCount} / ${totalPractices}`;
-        
+        progressBar.style.width = (checkedCount / totalPractices) * 100 + '%';
+
         if (checkedCount === totalPractices) {
             successMessage.innerHTML = "🎉 Congratulations! You've followed all best practices! 🚀";
-            fetchAnimalPicture();
-            //   if (localStorage.getItem("rewardImage")) {
-            //     rewardContainer.innerHTML = `<img src="${localStorage.getItem("rewardImage")}" alt="Cute Animal" style="max-width: 100%; border-radius: 10px;">`;
-            //   }
         } else if (checkedCount >= 12) {
             successMessage.innerHTML = "🔥 Amazing! Your commitment to best practice is paying off!";
-            if (!localStorage.getItem("rewardImage")) {
-                fetchAnimalPicture();
-            } else {
-                rewardContainer.innerHTML = `<img src="${localStorage.getItem("rewardImage")}" alt="Cute Animal" style="max-width: 100%; border-radius: 10px;">`;
-            }
         } else if (checkedCount >= 8) {
             successMessage.innerHTML = "💪 You're doing great! Keep improving!";
         } else if (checkedCount >= 4) {
@@ -76,34 +71,46 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             successMessage.innerHTML = "💡 Let's begin! Implement more best practices for better coding!";
         }
-    
-        rewardContainer.innerHTML = `
-            <div class="progress-container">
-                <div class="progress-bar" style="width: ${(checkedCount / totalPractices) * 100}%"></div>
-            </div>
-        `;
 
-        const updatedState = {};
-        checkboxes.forEach(cb => updatedState[cb.id] = cb.checked);
+        const updatedState = Object.fromEntries(checkboxes.map(cb => [cb.id, cb.checked]));
         localStorage.setItem("checkedPractices", JSON.stringify(updatedState));
+
+        if (checkedCount >= 12) {
+            if (!localStorage.getItem("rewardImage")) {
+                fetchAnimalPicture();
+            } else {
+                displayRewardImage(localStorage.getItem("rewardImage"));
+            }
+        } else {
+            localStorage.removeItem("rewardImage");
+            hideRewardImage();
+        }
     }
 
     document.querySelectorAll("#best-practice-list input").forEach(checkbox => {
         checkbox.addEventListener("change", summaryUpdate);
     });
+
+    function fetchAnimalPicture() {
+        fetch("https://api.thecatapi.com/v1/images/search")
+            .then(response => response.json())
+            .then(data => {
+                if (data.length > 0) {
+                    const imageUrl = data[0].url;
+                    localStorage.setItem("rewardImage", imageUrl);
+                    displayRewardImage(imageUrl);
+                }
+            })
+            .catch(error => console.error("Error fetching image:", error));
+    }
+
+    function displayRewardImage(imageUrl) {
+        rewardContainer.innerHTML = `<img src="${imageUrl}" alt="Cute Animal" class="reward-image">`;
+    }
+    
+    function hideRewardImage() {
+        rewardContainer.innerHTML = ""; 
+    }
     
     summaryUpdate();
-    
-
-// Fetch a cute animal picture from a public API
-function fetchAnimalPicture() {
-    fetch("https://api.thecatapi.com/v1/images/search")
-        .then(response => response.json())
-        .then(data => {
-            const imageUrl = data[0].url;
-            rewardContainer.innerHTML = `<img src="${imageUrl}" alt="Cute Animal" style="max-width: 100%; border-radius: 10px;">`;
-        })
-        .catch(error => console.error("Error fetching image:", error));
-}
-
 });

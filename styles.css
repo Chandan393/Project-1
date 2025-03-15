@@ -73,23 +73,6 @@ ul li input {
     margin-top: 10px;
 }
 
-
-.progress-container {
-    width: 100%;
-    background-color: #f3f3f3;
-    border-radius: 5px;
-    overflow: hidden;
-    height: 20px;
-    margin-top: 10px;
-}
-
-.progress-bar {
-    height: 100%;
-    background-color: #4caf50;
-    width: 0%;
-    transition: width 0.5s ease-in-out;
-}
-
 #best-practice-list {
     list-style-type: none;
     padding: 0;
@@ -124,6 +107,7 @@ ul li input {
     border-radius: 10px;
     overflow: hidden;
     margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 #progress-bar {
@@ -133,6 +117,16 @@ ul li input {
     transition: width 0.4s ease-in-out;
     border-radius: 10px;
 }
+
+.reward-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-top: 10px;
+    display: block;
+}
+
 
 @media (max-width: 768px) {
     main {
