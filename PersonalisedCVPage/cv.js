@@ -6,8 +6,9 @@ document.addEventListener("DOMContentLoaded", function () {
             const targetSection = document.querySelector(targetId);
 
             if (targetSection) {
+                let offset = window.innerWidth <= 480 ? 400 : 100;
                 window.scrollTo({
-                    top: targetSection.offsetTop - 100,
+                    top: targetSection.offsetTop - offset,
                     behavior: 'smooth'
                 });
                 document.querySelectorAll('.nav-link').forEach(navLink => navLink.classList.remove('active'));
@@ -23,7 +24,8 @@ document.addEventListener("DOMContentLoaded", function () {
         let currentSection = '';
 
         sections.forEach(section => {
-            const sectionTop = section.offsetTop - 150;
+            let offset = window.innerWidth <= 480 ? 150 : 100;
+            const sectionTop = section.offsetTop - offset;
             const sectionHeight = section.clientHeight;
 
             if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionTop + sectionHeight) {

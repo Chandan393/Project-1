@@ -596,9 +596,91 @@
 
 /* Certifications Section */
 .certifications-carousel {
-    max-width: 800px;
-    margin: 0 auto;
+    position: relative;
+    max-width: 90%; 
+    margin: auto;
+    text-align: center;
+}
+
+.cert-slide {
+    display: none; 
     padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.cert-slide.active {
+    display: block;
+}
+
+.cert-dots {
+    text-align: center;
+    padding-top: 10px;
+}
+
+.cert-dot {
+    height: 12px;
+    width: 12px;
+    margin: 5px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.cert-dot.active {
+    background-color: #333;
+}
+
+.cert-prev, .cert-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    transition: background 0.3s ease;
+}
+
+.cert-prev:hover, .cert-next:hover {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+
+/* Achievement Section */
+.achievements-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; 
+    padding: 20px;
+}
+
+.achievement-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.achievement-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.achievement-icon {
+    font-size: 40px;
+    color: #ff9800;
+    margin-bottom: 15px;
 }
 
 /* Contact Section */
@@ -716,6 +798,90 @@
     margin-top: 15px;
     font-size: 16px;
     color: var(--secondary-color);
+}
+
+/* Back Link */
+.back-link {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	font-size: 16px;
+	color: white;
+	text-decoration: none;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	font-weight: bold;
+	padding: 8px 12px;
+	border-radius: 5px;
+	transition: color 0.3s ease, transform 0.3s ease-in-out;
+}
+
+.back-link i {
+	font-size: 18px;
+	transition: transform 0.3s ease-in-out;
+}
+
+.back-link:hover {
+	color: #ddd;
+	transform: translateX(-3px);
+}
+
+
+
+/* Footer Section */
+footer {
+	background-color: var(--primary-color);
+	color: white;
+	padding: 30px 15px;
+	text-align: center;
+	margin-top: 30px;
+}
+
+.footer-container {
+	max-width: 90%;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	gap: 12px;
+}
+
+.footer-logo {
+	font-size: 22px;
+	font-weight: bold;
+	color: var(--secondary-color);
+	margin-bottom: 8px;
+}
+
+.footer-links {
+	display: flex;
+	flex-direction: column !important;
+	align-items: center;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	gap: 8px;
+}
+
+.footer-links li {
+	text-align: center;
+}
+
+.footer-links li a {
+	color: white;
+	text-decoration: none;
+	font-size: 14px;
+	transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+	display: inline-block;
+	padding: 5px 8px;
+	border-radius: 5px;
+}
+
+.footer-links li a:hover {
+	color: var(--secondary-color);
+	background-color: rgba(255, 255, 255, 0.1);
 }
 
 
@@ -1153,3 +1319,154 @@
           font-size: 13px;
       }
   }
+
+  @media (min-width: 768px) {
+	.back-link {
+		top: 20px;
+		left: 20px;
+		font-size: 18px;
+		padding: 10px 15px;
+		gap: 8px;
+	}
+	
+	.back-link i {
+		font-size: 20px;
+	}
+}
+
+@media (max-width: 480px) {
+	.back-link {
+		font-size: 14px;
+		padding: 6px 10px;
+		gap: 4px;
+	}
+	
+	.back-link i {
+		font-size: 16px;
+	}
+}
+
+
+@media (min-width: 768px) {
+	footer {
+		padding: 40px 20px;
+		margin-top: 40px;
+	}
+
+	.footer-container {
+		max-width: 800px;
+		gap: 15px;
+	}
+
+	.footer-logo {
+		font-size: 24px;
+		margin-bottom: 10px;
+	}
+
+	.footer-links {
+		flex-direction: column;
+		gap: 15px;
+	}
+}
+
+@media (max-width: 480px) {
+	footer {
+		padding: 25px 10px;
+		margin-top: 20px;
+	}
+
+	.footer-logo {
+		font-size: 20px;
+		margin-bottom: 6px;
+	}
+
+	.footer-links li a {
+		font-size: 13px;
+		padding: 4px 6px;
+	}
+}
+
+@media (min-width: 768px) {
+    .certifications-carousel {
+        max-width: 600px;
+    }
+
+    .cert-prev {
+        left: -30px;
+    }
+
+    .cert-next {
+        right: -30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .certifications-carousel {
+        max-width: 100%; 
+        padding: 0 20px;
+    }
+
+    .cert-slide {
+        padding: 15px;
+        font-size: 14px;
+    }
+
+    .cert-dot {
+        height: 10px;
+        width: 10px;
+    }
+
+    .cert-prev, .cert-next {
+        padding: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cert-slide {
+        padding: 10px;
+        font-size: 13px;
+    }
+
+    .cert-dot {
+        height: 8px;
+        width: 8px;
+        margin: 3px;
+    }
+
+    .cert-prev, .cert-next {
+        padding: 6px;
+        font-size: 12px;
+    }
+
+    .cert-prev {
+        left: 5px;
+    }
+
+    .cert-next {
+        right: 5px;
+    }
+}
+
+@media (max-width: 768px) {
+    .achievements-grid {
+        flex-direction: column; 
+        gap: 15px;
+    }
+
+    .achievement-card {
+        width: 80%; 
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .achievement-card {
+        width: 90%; 
+        padding: 12px;
+    }
+
+    .achievement-icon {
+        font-size: 30px;
+        margin-bottom: 10px;
+    }
+}
