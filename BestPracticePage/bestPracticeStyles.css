@@ -104,7 +104,6 @@ ul li input:checked {
 #best-practice-list li {
     display: flex;
     align-items: center;
-    flex-wrap: wrap; /* Ensures it wraps on small screens */
 }
 
 #best-practice-list input[type="checkbox"] {
@@ -114,7 +113,7 @@ ul li input:checked {
 .label {
     font-weight: 600;
     flex-grow: 1; 
-    width: auto;
+    width: 3.0rem;
     white-space: nowrap;
     font-size: 16px;
 }
@@ -200,6 +199,7 @@ ul li input:checked {
 
     .label {
         font-size: 14px;
+        width: auto;
     }
 
     .explanation {
